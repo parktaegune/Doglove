@@ -34,9 +34,18 @@
            <img v-bind:src="image" alt=""> 
          </figure> 
        </div> 
+     </div>
+     <div class="box"> 
+       <h1 class="title">보고 싶은 개 정보를 누르세요.</h1> 
+       <span v-for="dog in dogs" v-bind:key="dog"> 
+         <a href="#" class="button is-success is-rounded"> 
+           {{dog}} 
+         </a> &nbsp; 
+       </span> 
      </div> 
-   </section> 
+  </section> 
  </template> 
+
  
  <script> 
    import axios from 'axios'; 
@@ -46,7 +55,8 @@
      }, 
      async asyncData() { 
       const myImage = await axios.get('https://dog.ceo/api/breeds/image/random'); 
-      return { image: myImage.data.message }; 
+      const myDogs = await axios.get('https://dog.ceo/api/breeds/list');
+      return { image: myImage.data.message, dogs:myDogs.data.message}; 
     } 
    }; 
  </script> 
